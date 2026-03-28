@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gatchang Mabany's Portfolio</title>
+    <link rel="icon" type="image/jpg" href="image/photo_2025-02-14_01-03-54.jpg">
+    <!-- Modern 'Outfit' font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Force Custom Cursor */
+        * {
+            cursor: none !important;
+        }
+
+        /* Modern Glassmorphism Variables & Base */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --neon-blue: #00f0ff;
+            --neon-purple: #9d00ff;
+            --neon-pink: #ff007f;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+            --body-bg: #0f172a;
+            --ambient-bg: #0b0f19;
+            --input-bg: rgba(0, 0, 0, 0.2);
+            --input-focus: rgba(0, 0, 0, 0.4);
+            --footer-bg: rgba(0, 0, 0, 0.3);
+            --glass-overlay: rgba(255, 255, 255, 0.03);
+            --glass-overlay-hover: rgba(255, 255, 255, 0.08);
+            --card-img-bg: rgba(0, 0, 0, 0.3);
+            --box-shadow-hover: rgba(0, 0, 0, 0.4);
+        }
+
+        :root[data-theme="light"] {
+            --glass-bg: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --neon-blue: #0284c7;
+            --neon-purple: #7e22ce;
+            --neon-pink: #be185d;
+            --text-main: #0f172a;
+            --text-muted: #334155;
+            --body-bg: #f8fafc;
+            --ambient-bg: #e2e8f0;
+            --input-bg: rgba(255, 255, 255, 0.8);
+            --input-focus: rgba(255, 255, 255, 1);
+            --footer-bg: rgba(255, 255, 255, 0.4);
+            --glass-overlay: rgba(255, 255, 255, 0.4);
+            --glass-overlay-hover: rgba(255, 255, 255, 0.7);
+            --card-img-bg: rgba(255, 255, 255, 0.5);
+            --box-shadow-hover: rgba(31, 38, 135, 0.15);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--body-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Custom Cursor Elements */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--neon-purple);
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+
+        .cursor-hover .cursor-outline {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(157, 0, 255, 0.15);
+            border-color: transparent;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Animated Glowing Orbs Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: var(--ambient-bg);
+            transition: background 0.5s ease;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.6;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 50vw;
+            height: 50vw;
+            background: var(--neon-purple);
+            top: -10vw;
+            left: -10vw;
+        }
+
+        .orb-2 {
+            width: 40vw;
+            height: 40vw;
+            background: var(--neon-blue);
+            bottom: -5vw;
+            right: -5vw;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 30vw;
+            height: 30vw;
+            background: var(--neon-pink);
+            top: 40vh;
+            left: 30vw;
+            animation-duration: 22s;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.1);
+            }
+
+            100% {
+                transform: translateY(20px) scale(0.9);
+            }
+        }
+
+        /* Reusable Glass Panel Styles */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            border-radius: 20px;
+        }
+
+        /* Scroll Entrance Animation */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation */
+        nav {
+            max-width: max-content;
+            margin: 2rem auto;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-radius: 50px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--text-main);
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--neon-blue);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        /* General Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .section {
+            padding: 40px;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 15px;
+            display: inline-block;
+            color: var(--neon-blue);
+        }
+
+        /* Hero Section Refamp */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 5s ease infinite alternate;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .typing-container {
+            min-height: 100px;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .typing::after {
+            content: '|';
+            animation: blink-caret 1s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-glow,
+        .btn-outline {
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-glow {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border: none;
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.4);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.5);
+            filter: brightness(1.2);
+        }
+
+        .btn-outline {
+            background: var(--glass-overlay);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-outline:hover {
+            background: var(--glass-overlay-hover);
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+        }
+
+        .hero-image {
+            flex: 0 0 350px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-pic {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--glass-border);
+            box-shadow: 0 0 50px rgba(0, 240, 255, 0.2);
+            /* Handled by VanillaTilt dynamically */
+        }
+
+        /* Projects Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.4s;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-overlay);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 20px 50px var(--box-shadow-hover);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+            background: var(--card-img-bg);
+            transform: translateZ(30px);
+        }
+
+        .project-info {
+            padding: 25px;
+            flex-grow: 1;
+            transform: translateZ(40px);
+        }
+
+        .project-info h3 {
+            margin: 0 0 15px;
+            color: var(--neon-pink);
+            font-size: 1.4rem;
+        }
+
+        .project-info p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Skills Section */
+        #skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        #skills li {
+            background: var(--glass-overlay);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #skills li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        #skills li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+
+        #skills li:hover::before {
+            left: 100%;
+        }
+
+        /* Experience & Education Timelines */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            bottom: 0;
+            left: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 16px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -35px;
+            width: 12px;
+            height: 12px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 8px;
+            color: var(--text-main);
+            font-size: 1.3rem;
+        }
+
+        .timeline-item p strong {
+            color: var(--neon-purple);
+        }
+
+        .timeline-item p {
+            margin: 5px 0 0;
+            color: var(--text-muted);
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form label {
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: -10px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            background: var(--input-focus);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .contact-form button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            align-self: flex-start;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(157, 0, 255, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Calendar Widget */
+        .calendar-widget {
+            padding: 30px;
+            background: var(--glass-overlay);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--box-shadow-hover);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: var(--neon-blue);
+        }
+
+        .calendar-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+        }
+
+        .calendar-header button {
+            background: var(--glass-overlay);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            color: var(--text-main);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calendar-header button:hover {
+            background: var(--neon-purple);
+            color: white;
+            border-color: var(--neon-purple);
+            transform: scale(1.1);
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .calendar-dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+
+        .calendar-dates div {
+            padding: 10px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .calendar-dates div:hover:not(.empty) {
+            background: var(--glass-overlay-hover);
+            transform: translateY(-2px);
+        }
+
+        .calendar-dates .today {
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(157, 0, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            background: var(--footer-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        footer a {
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .profile-pic {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Animated Orbs Background -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav class="glass">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">☀️</button>
+    </nav>
+
+    <div class="container">
+        <!-- Awesome Hero Section -->
+        <section class="hero section glass">
+            <div class="hero-content">
+                <h1>Hi, I'm <br><span class="highlight">Gatchang Mabany</span></h1>
+                <div class="typing-container">
+                    <span class="typing"></span>
+                </div>
+                <div class="hero-actions">
+                    <a href="GatchangMabany.pdf" class="btn-glow" target="_blank">Download CV</a>
+                    <a href="#contact" class="btn-outline">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="image/photo_2025-02-14_01-03-54.jpg" alt="Profile Image" class="profile-pic" data-tilt
+                    data-tilt-glare data-tilt-max-glare="0.5" data-tilt-max="15" data-tilt-speed="400">
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section glass">
+            <h2>My Projects</h2>
+            <div class="projects">
+                <div class="project-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-max="10"
+                    data-tilt-speed="400">
+                    <img src="image/charity.png" alt="Charity Management System">
+                    <div class="project-info">
+                        <h3>Charity Donation Management System</h3>
+                        <p>The <strong>Donation Management System</strong> is a web-based platform designed to
+                            streamline the donation process for charitable organizations by enabling secure donor
+                            registration, seamless donation processing, and transparent fund allocation tracking.
+                            Administrators can efficiently manage contributions, generate detailed reports, and ensure
+                            accountability in fund distribution.</p>
+                    </div>
+                </div>
+                <div class="project-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-max="10"
+                    data-tilt-speed="400">
+                    <img src="image/blood.png" alt="Blood Bank System">
+                    <div class="project-info">
+                        <h3>Blood Bank Management</h3>
+                        <p>The <strong>Bank & Donation Management System</strong> is a web-based platform designed to
+                            facilitate the efficient management of blood donations, donors, and inventory in blood
+                            banks. It allows donors to register, schedule donations, and track their eligibility, while
+                            administrators can manage blood stock, track requests, and ensure timely distribution to
+                            hospitals in need.</p>
+                    </div>
+                </div>
+                <div class="project-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-max="10"
+                    data-tilt-speed="400">
+                    <img src="image/movie.png" alt="ViDi Movie Store">
+                    <div class="project-info">
+                        <h3>ViDi movie store</h3>
+                        <p>The <strong>ViDi Movie Store</strong> is an online platform designed for browsing,
+                            purchasing, and streaming movies. It provides users with a seamless experience for
+                            discovering films across various genres, managing their watchlists, and making secure
+                            transactions. Administrators can efficiently manage movie inventories, user subscriptions,
+                            and promotions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section glass">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML & CSS</li>
+                <li>JavaScript</li>
+                <li>React.js</li>
+                <li>C++</li>
+                <li>Java</li>
+                <li>Node.js</li>
+                <li>Git & GitHub</li>
+                <li>Responsive Design</li>
+                <li>Sql Server</li>
+                <li>MySQL</li>
+                <li>PHP</li>
+                <li>Python</li>
+                <li>Project Management</li>
+                <li>Agile Methodologies</li>
+                <li>Problem Solving</li>
+                <li>Team Collaboration</li>
+            </ul>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section glass">
+            <h2>Experience</h2>
+            <ul class="timeline">
+                <li class="timeline-item glass">
+                    <h3>Web Developer</h3>
+                    <p><strong>ABC Company, Addis Ababa</strong> | June 2021 - Present</p>
+                    <p>Developed and maintained web applications using modern technologies. Collaborated with
+                        cross-functional teams to deliver high-quality software solutions.</p>
+                </li>
+                <li class="timeline-item glass">
+                    <h3>Freelance Developer</h3>
+                    <p><strong>Self-employed</strong> | January 2019 - May 2021</p>
+                    <p>Worked on various client projects, focusing on front-end development and user experience design.
+                    </p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section glass">
+            <h2>Education</h2>
+            <ul class="timeline">
+                <li class="timeline-item glass">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <p><strong>Unity University</strong> | 2023 - 2026</p>
+                </li>
+                <li class="timeline-item glass">
+                    <h3>Google Project Management Certificate</h3>
+                    <p><strong>Coursera Online Course</strong> | 2024 - 2025</p>
+                </li>
+                <li class="timeline-item glass">
+                    <h3>Uganda Advanced Certificate of Education</h3>
+                    <p><strong>Standard High School</strong> | 2020 - 2022</p>
+                </li>
+                <li class="timeline-item glass">
+                    <h3>Uganda Certificate of Education</h3>
+                    <p><strong>Maranatha High School</strong> | 2016 - 2019</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section glass">
+            <h2>Contact Me</h2>
+            <div class="contact-wrapper">
+                <form class="contact-form" action="https://formsubmit.co/gatchangmabany1@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New Portfolio Contact from a Visitor!">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your name">
+                    </div>
+
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div>
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="5" required
+                            placeholder="Write your message here..."></textarea>
+                    </div>
+
+                    <button type="submit">Send Message</button>
+                </form>
+
+                <div class="calendar-widget glass" data-tilt data-tilt-max="5" data-tilt-speed="400">
+                    <div class="calendar-header">
+                        <button id="prev-month" aria-label="Previous Month">&lt;</button>
+                        <h3 id="month-year"></h3>
+                        <button id="next-month" aria-label="Next Month">&gt;</button>
+                    </div>
+                    <div class="calendar-days">
+                        <div>Su</div>
+                        <div>Mo</div>
+                        <div>Tu</div>
+                        <div>We</div>
+                        <div>Th</div>
+                        <div>Fr</div>
+                        <div>Sa</div>
+                    </div>
+                    <div class="calendar-dates" id="calendar-dates"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy;
+            <script>document.write(new Date().getFullYear());</script> Gatchang Mabany. All rights reserved. <a
+                href="mailto:gatchangmabany1@gmail.com">Email Me</a>
+        </p>
+    </footer>
+
+    <!-- VanillaTilt implementation for 3D elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* ===============================
+               TYPEWRITER LOGIC
+               =============================== */
+            const textElement = document.querySelector(".typing");
+            const texts = [
+                "a highly skilled web developer based in Addis Ababa, Ethiopia.",
+                "specializing in responsive, high-performance digital solutions.",
+                "experienced in HTML, CSS, JavaScript, and modern frameworks.",
+                "passionate about building web experiences that drive engagement.",
+                "certified in Google Project Management & Disaster Assessment."
+            ];
+            let textIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                if (!textElement) return;
+                const currentText = texts[textIndex];
+
+                if (isDeleting) {
+                    textElement.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        textIndex = (textIndex + 1) % texts.length;
+                        setTimeout(type, 500);
+                        return;
+                    }
+                } else {
+                    textElement.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                    if (charIndex === currentText.length) {
+                        isDeleting = true;
+                        setTimeout(type, 3000);
+                        return;
+                    }
+                }
+                setTimeout(type, isDeleting ? 20 : 40);
+            }
+            setTimeout(type, 1000);
+
+            /* ===============================
+               CUSTOM CURSOR LOGIC
+               =============================== */
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+
+            // Hover effect trigger for cursor
+            const clickables = document.querySelectorAll('a, button, input, textarea, .project-card, .calendar-dates div, .profile-pic');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+            });
+
+            /* ===============================
+               PARALLAX ORB LOGIC
+               =============================== */
+            document.addEventListener('mousemove', (e) => {
+                const orbs = document.querySelectorAll('.orb');
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 20;
+                    const xOffset = (window.innerWidth / 2 - e.pageX) / speed;
+                    const yOffset = (window.innerHeight / 2 - e.pageY) / speed;
+                    orb.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                });
+            });
+
+            /* ===============================
+               SCROLL ENTRANCE OBSERVER
+               =============================== */
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.section, .timeline-item, .project-card').forEach(el => {
+                el.classList.add('fade-up');
+                observer.observe(el);
+            });
+
+            /* ===============================
+               CALENDAR WIDGET LOGIC
+               =============================== */
+            const monthYear = document.getElementById('month-year');
+            const calendarDates = document.getElementById('calendar-dates');
+            const prevMonth = document.getElementById('prev-month');
+            const nextMonth = document.getElementById('next-month');
+            let currentDate = new Date();
+
+            function renderCalendar() {
+                if (!calendarDates) return;
+                calendarDates.innerHTML = '';
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth();
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                monthYear.textContent = `${monthNames[month]} ${year}`;
+                const today = new Date();
+
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDiv = document.createElement('div');
+                    emptyDiv.classList.add('empty');
+                    calendarDates.appendChild(emptyDiv);
+                }
+
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dateDiv = document.createElement('div');
+                    dateDiv.textContent = i;
+                    if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                        dateDiv.classList.add('today');
+                    }
+                    // Re-apply hover capability to new DOM elements dynamically
+                    dateDiv.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+                    dateDiv.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+                    calendarDates.appendChild(dateDiv);
+                }
+            }
+
+            if (prevMonth && nextMonth) {
+                prevMonth.addEventListener('click', (e) => { e.preventDefault(); currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); });
+                nextMonth.addEventListener('click', (e) => { e.preventDefault(); currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); });
+                renderCalendar();
+            }
+
+            /* ===============================
+               THEME TOGGLE LOGIC
+               =============================== */
+            const themeToggle = document.getElementById('theme-toggle');
+            const rootElement = document.documentElement;
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            rootElement.setAttribute('data-theme', savedTheme);
+            updateToggleButton(savedTheme);
+
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = rootElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                rootElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateToggleButton(newTheme);
+            });
+
+            function updateToggleButton(theme) {
+                if (theme === 'light') {
+                    themeToggle.textContent = '🌙';
+                    themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+                } else {
+                    themeToggle.textContent = '☀️';
+                    themeToggle.setAttribute('aria-label', 'Switch to light mode');
+                }
+            }
+        });
+    </script>
+
+    <!-- AI Receptionist Embed (Chatbase) -->
+    <script>
+        (function () { if (!window.chatbase || window.chatbase("getState") !== "initialized") { window.chatbase = (...arguments) => { if (!window.chatbase.q) { window.chatbase.q = [] } window.chatbase.q.push(arguments) }; window.chatbase = new Proxy(window.chatbase, { get(target, prop) { if (prop === "q") { return target.q } return (...args) => target(prop, ...args) } }) } const onLoad = function () { const script = document.createElement("script"); script.src = "https://www.chatbase.co/embed.min.js"; script.id = "sPktyMRQRSOHdhT4AqLUb"; script.domain = "www.chatbase.co"; document.body.appendChild(script) }; if (document.readyState === "complete") { onLoad() } else { window.addEventListener("load", onLoad) } })();
+    </script>
+</body>
+
+</html>
